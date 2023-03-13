@@ -1,6 +1,6 @@
 import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
-// App이라는 함수 정의
 const App = () => {
   //여러개의 비용 아이템이 들어있는 배열
   const expenses = [
@@ -24,10 +24,17 @@ const App = () => {
       date: new Date(2021, 5, 12),
     },
   ];
+
+  //expense 배열에 data 객체 추가하는 함수
+  const addExpenseHandler = (newExpense) => {
+    console.log("@ App.js");
+    console.log(newExpense);
+    // expense 배열에 data 객체 추가하는 함수 만들기
+  };
+
   return (
-    //리턴문 안은 JSX 문법으로 작성(자바스트림트 안의 HTML 코드가 있는 모양)
     <div>
-      <h2>Let's get started!</h2>
+      <NewExpense onAddExpenseData={addExpenseHandler} />
       <Expenses items={expenses} />
     </div>
   );
