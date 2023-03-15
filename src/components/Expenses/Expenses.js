@@ -16,6 +16,23 @@ const Expenses = (props) => {
     (expense) => expense.date.getFullYear().toString() === filteredYear
   );
   //<ExpenseItem /> 컴포넌트를 매핑할 때, 매핑할 배열로 필터링된 filteredExpenses울 보내면 된다.
+
+  //변수에 JSX 컨텐츠를 기본값 할당 및 저장할 수 있다.
+  let expenseContent = <div>지출한 비용이 없습니다.</div>;
+  //그리고 JSX 반환하기 전 if문으로 체크
+  if (filteredExpenses.length > 0) {
+    //expenseContent에 오버라이드(겹쳐쓰기, 값 변경)
+    expenseContent = filteredExpenses.map((expenses) => (
+      <ExpenseItem
+        key={expenses.id}
+        id={expenses.id}
+        title={expenses.title}
+        amount={expenses.amount}
+        date={expenses.date}
+      />
+    ));
+  }
+
   return (
     <Card className="expenses">
       <ExpensesFilter
@@ -23,15 +40,7 @@ const Expenses = (props) => {
         //양방향 바인딩: state select value로 넣기 위해 props으로 보내기
         selected={filteredYear}
       />
-      {filteredExpenses.map((expenses) => (
-        <ExpenseItem
-          key={expenses.id}
-          id={expenses.id}
-          title={expenses.title}
-          amount={expenses.amount}
-          date={expenses.date}
-        />
-      ))}
+      {expenseContent}
     </Card>
   );
 };
