@@ -74,7 +74,10 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
-        <button type="submit">추가하기</button>
+        <button type="button" onClick={props.onCancel}>
+          취소
+        </button>
+        <button type="submit">비용 추가</button>
       </div>
     </form>
   );
