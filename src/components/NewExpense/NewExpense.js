@@ -26,7 +26,6 @@ const NewExpense = (props) => {
     setIsEditing((prev) => !prev);
   };
 
-  console.log(isEditing);
   return (
     <div className="new-expense">
       {!isEditing && (
@@ -37,7 +36,7 @@ const NewExpense = (props) => {
           onCancel={stopEditingHandler}
           onSaveExpenseData={saveExpenseDataHandler}
         />
-      )}{" "}
+      )}
     </div>
   );
 };

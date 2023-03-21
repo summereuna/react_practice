@@ -3,6 +3,7 @@ import "./Expenses.css";
 import ExpensesFilter from "./ExpensesFilter";
 import { useState } from "react";
 import ExpensesList from "./ExpensesList";
+import ExpenseChart from "./ExpenseChart";
 
 const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState("2020");
@@ -23,6 +24,7 @@ const Expenses = (props) => {
         //양방향 바인딩: state select value로 넣기 위해 props으로 보내기
         selected={filteredYear}
       />
+      <ExpenseChart filteredExpenses={filteredExpenses} />
       {<ExpensesList filteredExpenses={filteredExpenses} />}
     </Card>
   );

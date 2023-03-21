@@ -24,7 +24,8 @@ const ExpenseForm = (props) => {
     //2. state 결합하기: 제출된 폼의 내용을 모두 담은 객체 생성
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      //여러 값을 추가할 때 해당 값은 숫자가 아닌 문자열로 추가됩니다. 고치는 것은 쉽습니다. 단순히 숫자 변환을 실행하면 됩니다:
+      amount: +enteredAmount,
       //날짜 생성자로 날짜 생성 후, 해당 날짜 문자열 분석하여 날짜 객체로 변환한 enteredDate 전달
       date: new Date(enteredDate),
     };
