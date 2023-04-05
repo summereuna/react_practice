@@ -60,8 +60,6 @@ const CourseInput = (props) => {
     props.onAddGoal(enteredValue);
   };
 
-  //이미 스타일에 form-control에 해당하는 스타일이 첨부되었기 때문에 form-control 클래스를 설정할 필요가 없다.
-  //다만 유효한지 아닌지를 체크하여 유효하지 않다면 invalid를 추가하면 된다.
   return (
     <form onSubmit={formSubmitHandler}>
       <FormControl invalid={!isValid}>
