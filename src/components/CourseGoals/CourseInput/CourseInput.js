@@ -1,39 +1,7 @@
 import React, { useState } from "react";
 
 import Button from "../../UI/Button/Button";
-//import "./CourseInput.css";
-import styled from "styled-components";
-
-//JSX에서 컴포넌트로 사용할 것이기 때문에 대문자로 작성
-//스타일 컴포넌트 패키지 사용: JSX의 div 부분 대체
-
-//스타일컴포넌트에 전달되는 일부 props에 따라 스타일을 동적으로 바꿀 수 있다.
-const FormControl = styled.div`
-  margin: 0.5rem 0;
-
-  & label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 0.5rem;
-    color: ${(props) => (props.invalid ? "red" : "black")};
-  }
-
-  & input {
-    display: block;
-    width: 100%;
-    border: 1px solid ${(props) => (props.invalid ? "red" : "#ccc")};
-    background: ${(props) => (props.invalid ? "#ffd7d7" : "transparent")};
-    font: inherit;
-    line-height: 1.5rem;
-    padding: 0 0.25rem;
-  }
-
-  & input:focus {
-    outline: none;
-    background: #fad0ec;
-    border-color: #8b005d;
-  }
-`;
+import styles from "./CourseInput.module.css";
 
 const CourseInput = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -62,18 +30,15 @@ const CourseInput = (props) => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <FormControl invalid={!isValid}>
+      <div
+        className={`${styles["form-control"]} ${!isValid && styles.invalid}`}
+      >
         <label>Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
-      </FormControl>
+      </div>
       <Button type="submit">Add Goal</Button>
     </form>
   );
 };
 
 export default CourseInput;
-/*
-방법 3. styled 컴포넌트에 props 추가하여 백틱안에 props 사용하기
-백틱안에 props을 사용하면 스타일을 손쉽게 동적으로 바꿀 수 있다.
-`<FormControl invalid={!isValid}>`
-*/
