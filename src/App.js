@@ -1,6 +1,6 @@
-import Form from "./components/Form";
-import UserList from "./components/UserList";
-import Modal from "./components/modal/Modal";
+import AddUser from "./components/User/AddUser";
+import UserList from "./components/User/UserList";
+// import Modal from "./components/modal/Modal";
 import "./App.css";
 import { useState } from "react";
 
@@ -15,7 +15,19 @@ function App() {
       return [...prev, newUser];
     });
   };
+  /*
+  const addUserHandler = (userName, userAge) => {
+    setUserList((prev) => {
+      return [...prev, {
+        name: userName,
+        age: userAge,
+        id: Math.random().toString()
+      }]
+    });
+  };
+
   const [isValid, setIsValid] = useState(true);
+
   const toggleInvalidModal = () => {
     setIsValid((prev) => !prev);
   };
@@ -30,27 +42,24 @@ function App() {
   const changeModalContent = (content) => {
     setModalContent(content);
   };
+  */
 
   return (
     <div>
-      <section id="newUserForm">
-        <Form
-          onAddUserData={addUserHandler}
-          onOpenInvalidModal={toggleInvalidModal}
-          onChangeModalTitle={changeModalTitle}
-          onChangeModalContent={changeModalContent}
-        />
-      </section>
-      <section id="newUserList">
-        <UserList userList={userList} />
-      </section>
-      {!isValid && (
+      <AddUser
+        onAddUserData={addUserHandler}
+        // onOpenInvalidModal={toggleInvalidModal}
+        // onChangeModalTitle={changeModalTitle}
+        // onChangeModalContent={changeModalContent}
+      />
+      <UserList userList={userList} />
+      {/* {!isValid && (
         <Modal
           title={modalTitle}
           content={modalContent}
           onCloseModal={toggleInvalidModal}
         />
-      )}
+      )} */}
     </div>
   );
 }

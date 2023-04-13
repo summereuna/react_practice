@@ -5,7 +5,6 @@
   border: 1px solid #8041cc;
   color: white;
   background: #8041cc;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -17,7 +16,7 @@
 
 .button:hover,
 .button:active {
+  outline: none;
   background: #b480f5;
   border-color: #b480f5;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
 }

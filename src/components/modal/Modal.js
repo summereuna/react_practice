@@ -1,23 +1,24 @@
 import styles from "./Modal.module.css";
+import Button from "../UI/Button";
+import Card from "../UI/Card";
 
 const Modal = (props) => {
-  const onClickModal = () => {
-    props.onCloseModal((prev) => !prev);
-  };
   return (
-    <div className={`${styles["modal-out-box"]}`}>
-      <div className={`${styles["modal-in-box"]}`}>
-        <div className={`${styles["modal-in-box__title"]}`}>{props.title}</div>
-        <div className={`${styles["modal-in-box__content"]}`}>
-          {props.content}
-          <button
-            className={`${styles["modal-in-box__btn"]}`}
-            onClick={onClickModal}
-          >
-            OK
-          </button>
+    <div>
+      <div className={styles.backdrop} onClick={props.onCloseModal}></div>
+      <Card className={styles.modal}>
+        <header className={styles.header}>
+          <h2>{props.title}</h2>
+        </header>
+        <div className={styles.content}>
+          <p>{props.content}</p>
+          <footer className={styles.actions}>
+            <Button onClick={props.onCloseModal} type="button">
+              OK
+            </Button>
+          </footer>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };
