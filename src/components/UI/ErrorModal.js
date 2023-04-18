@@ -31,7 +31,7 @@ const ModalOverlay = (props) => {
   );
 };
 
-// 4. Portal사용하여 Real DOM의 다른 위치로 ReactDOM을 보내기
+// 3. Portal사용하여 Real DOM의 다른 위치로 ReactDOM을 보내기
 //{ReactDOM.createPortal(리액트돔-JSX, 리얼돔 위치-DOM API)}
 const ErrorModal = (props) => {
   return (
