@@ -14,9 +14,19 @@ const Login = (props) => {
   //enteredEmail과 enteredPassword에 유효성 검사
   //사용자 입력 데이터의 사이드 이펙트: useEffect로 처리
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes("@") && enteredPassword.trim().length > 6
-    );
+    //500밀리초 후 유효성 검사하기
+    const identifier = setTimeout(() => {
+      console.log("Checking Validation");
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 6
+      );
+    }, 500);
+
+    return () => {
+      console.log("CLEANUP");
+      //타이머 지우기
+      clearTimeout(identifier);
+    };
   }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
