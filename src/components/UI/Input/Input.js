@@ -1,0 +1,28 @@
+import React from "react";
+
+import classes from "./Input.module.css";
+
+const Input = (props) => {
+  return (
+    <div
+      className={`${classes.control} ${props.className} ${
+        props.isValid === false ? classes.invalid : ""
+      }`}
+    >
+      <label htmlFor={props.id}>{props.label}</label>
+      <input
+        type={props.type}
+        id={props.id}
+        value={props.value}
+        onChange={props.onChange}
+        onBlur={props.onBlur}
+      >
+        {props.children}
+      </input>
+    </div>
+  );
+};
+
+export default Input;
+
+//재사용해야 하는 컴포넌트는 props으로
