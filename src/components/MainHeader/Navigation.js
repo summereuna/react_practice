@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import classes from "./Navigation.module.css";
 
-const Navigation = (props) => {
+const Navigation = () => {
   /*
   컨텍스트 사용, 활용, 리스닝 할 수 있게 하는 훅
   리액트 컴포넌트 함수에서 useContext()호출하여 사용
