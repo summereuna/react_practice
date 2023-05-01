@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useReducer, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useReducer,
+  useContext,
+  useRef,
+} from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
@@ -46,6 +52,10 @@ const Login = () => {
   });
 
   const ctx = useContext(AuthContext);
+
+  //인풋 참조 만들기
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
 
   useEffect(() => {
     console.log("EFFECT RUNNING");
@@ -107,7 +117,17 @@ const Login = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    ctx.onLogin(emailState.value, passwordState.value);
+    //폼이 유효할 때만 로그인 호출
+    if (formIsValid) {
+      ctx.onLogin(emailState.value, passwordState.value);
+    } else if (!emailIsValid) {
+      // 아닌 경우, 첫 번째로 이메일 인풋 유효한지 체크하기 위해 포커스
+      //워매 이게 뭐람 내가 만든 액티베이트 메소드를 가져올수 있쟈나....ㅇ0ㅇ..?
+      emailInputRef.current.focus();
+    } else if (!passwordIsValid) {
+      // 아닌 경우, 첫 번째로 패스워드 인풋 유효한지 체크하기 위해 포커스
+      passwordInputRef.current.focus();
+    }
   };
 
   return (
@@ -121,6 +141,7 @@ const Login = () => {
           value={emailState.value}
           onChange={emailChangeHandler}
           onBlur={validateEmailHandler}
+          ref={emailInputRef}
         />
         <Input
           isValid={passwordIsValid}
@@ -130,9 +151,10 @@ const Login = () => {
           value={passwordState.value}
           onChange={passwordChangeHandler}
           onBlur={validatePasswordHandler}
+          ref={passwordInputRef}
         />
         <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+          <Button type="submit" className={classes.btn}>
             Login
           </Button>
         </div>
