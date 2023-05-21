@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import MoviesList from "./components/MoviesList";
 import "./App.css";
@@ -8,7 +8,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchMoviesHandler = async () => {
+  //useCallback 으로 함수 감싸기
+  const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     //이전에 받았을 수도 있는 에러 초기화
     setError(null);
@@ -38,7 +39,14 @@ function App() {
 
     //데이터 다 받아오면 로딩 끝내기 / 에러 발생하면 로딩이 필요 없기 때문에 로딩 중단하기
     setIsLoading(false);
-  };
+  }, []);
+
+  // HTTP 요청 사이드 이펙트
+  useEffect(() => {
+    fetchMoviesHandler();
+  }, [fetchMoviesHandler]);
+  // 모든 의존성은 의존성 배열에 넣어야 하지만 이렇게 하면 무한 루프 발생
+  // 따라서 useCallback 훅을 사용하여 fetchMoviesHandler 함수를 감싸서 함수 재생성을 방지
 
   let content = <p>Found no movies.</p>;
 
