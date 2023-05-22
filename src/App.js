@@ -16,6 +16,7 @@ function App() {
     setError(null);
 
     try {
+      console.log("FETCGHHHH");
       const response = await fetch(
         "https://react-http-35c4a-default-rtdb.firebaseio.com/movies.json"
       );
@@ -47,27 +48,36 @@ function App() {
     setIsLoading(false);
   }, []);
 
+  const addMovieHandler = async (movie) => {
+    setIsLoading(true);
+    //이전에 받았을 수도 있는 에러 초기화
+    setError(null);
+    try {
+      const response = await fetch(
+        "https://react-http-35c4a-default-rtdb.firebaseio.com/movies.json",
+        {
+          method: "POST",
+          body: JSON.stringify(movie),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json;
+      fetchMoviesHandler();
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
+  };
+
   // HTTP 요청 사이드 이펙트
   useEffect(() => {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
   // 모든 의존성은 의존성 배열에 넣어야 하지만 이렇게 하면 무한 루프 발생
   // 따라서 useCallback 훅을 사용하여 fetchMoviesHandler 함수를 감싸서 함수 재생성을 방지
-
-  const addMovieHandler = async (movie) => {
-    const response = await fetch(
-      "https://react-http-35c4a-default-rtdb.firebaseio.com/movies.json",
-      {
-        method: "POST",
-        body: JSON.stringify(movie),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const data = await response.json;
-  };
 
   let content = <p>Found no movies.</p>;
 
